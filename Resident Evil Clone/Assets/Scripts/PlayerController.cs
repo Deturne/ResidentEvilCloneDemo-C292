@@ -8,6 +8,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpForce;
     [SerializeField] float mouseSensitivity;
     [SerializeField] float verticalLookLimit;
+
+    [SerializeField] private float maxHp = 15f;
+
+    public static float currentHealth;
+
     private bool isGrounded = true;
     private float xRotation;
 
@@ -16,6 +21,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentHealth = maxHp;
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -30,6 +36,7 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+        
     }
 
     void LookAround()
@@ -69,6 +76,16 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
         }
+        if (collision.gameObject.tag == "Zombie")
+        {
+            currentHealth -= 5;
+            Debug.Log("Player Hit: " + currentHealth);
+            if (currentHealth <= 0)
+            {
+                Destroy(gameObject);
+            }
+
+        }
     }
     private void OnCollisionExit(Collision collision)
     {
@@ -76,5 +93,6 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
         }
+        
     }
 }
