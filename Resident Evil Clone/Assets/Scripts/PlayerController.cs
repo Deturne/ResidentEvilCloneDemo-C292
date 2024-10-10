@@ -86,6 +86,10 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        if (collision.gameObject.CompareTag("Mag"))
+        {
+            Debug.Log("Picked Up Magazine!");
+        }
     }
     private void OnCollisionExit(Collision collision)
     {

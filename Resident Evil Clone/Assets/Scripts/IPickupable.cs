@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : Weapon
+public class IPickupable : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,13 +15,9 @@ public class Pistol : Weapon
     {
         
     }
-    protected override void Fire()
-    {
-        base.Fire();
-    }
 
-    protected override void Reload()
+    public interface IPickupable
     {
-        base.Reload();
+        public void Pickup(PlayerController player);
     }
 }
